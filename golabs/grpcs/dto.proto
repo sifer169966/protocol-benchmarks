@@ -1,0 +1,8 @@
+syntax = "proto3";
+package main;
+option go_package = "github.com/sifer169966/protocol-benchmarks/golabs/grpcs/apis/pb";
+
+
+message Request {
+    string name = 1;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+package main;
+option go_package = "github.com/sifer169966/protocol-benchmarks/golabs/grpcs/apis/pb";
+
+import "google/protobuf/empty.proto";
+import "dto.proto";
+
+service Test {
+    rpc Test(main.Request) returns(google.protobuf.Empty);
+}
