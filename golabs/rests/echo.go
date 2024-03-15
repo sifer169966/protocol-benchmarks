@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo/v4"
 )
@@ -13,7 +14,7 @@ type request struct {
 
 func echoServer() {
 	e := echo.New()
-	e.GET("/small", func(c echo.Context) error {
+	e.POST("/small", func(c echo.Context) error {
 		var r request
 		err := c.Bind(&r)
 		if err != nil {
@@ -21,7 +22,7 @@ func echoServer() {
 		}
 		return c.NoContent(http.StatusOK)
 	})
-	e.GET("/medium", func(c echo.Context) error {
+	e.POST("/medium", func(c echo.Context) error {
 		var r request
 		err := c.Bind(&r)
 		if err != nil {
@@ -29,7 +30,7 @@ func echoServer() {
 		}
 		return c.NoContent(http.StatusOK)
 	})
-	e.GET("/large", func(c echo.Context) error {
+	e.POST("/large", func(c echo.Context) error {
 		var r request
 		err := c.Bind(&r)
 		if err != nil {
@@ -37,7 +38,11 @@ func echoServer() {
 		}
 		return c.NoContent(http.StatusOK)
 	})
-	err := e.Start(":8080")
+	exposePort := os.Getenv("HTTP_EXPOSE_PORT")
+	if exposePort == "" {
+		exposePort = "8080"
+	}
+	err := e.Start(":" + exposePort)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -2,7 +2,7 @@
 import grpc from 'k6/net/grpc';
 //import { check, sleep } from 'k6';
 import exec from 'k6/execution';
-import { Rate } from "k6/metrics";
+//import { Rate } from "k6/metrics";
 
 
 const client = new grpc.Client();
@@ -11,7 +11,7 @@ client.load(['./'],
 'service.proto'
 );
 // Create a rate for the number of requests
-const grpc_reqs = new Rate("grpc_reqs");
+// const grpc_reqs = new Rate("grpc_reqs");
 
 export default () => {
     if (exec.vu.iterationInScenario == 0) {

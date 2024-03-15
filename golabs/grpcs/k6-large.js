@@ -11,7 +11,6 @@ client.load(['./'],
 
 export default () => {
     if (exec.vu.iterationInScenario == 0) {
-        console.log("init connection")
         client.connect('0.0.0.0:8080', {
             plaintext: true
           });
